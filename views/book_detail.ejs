@@ -1,0 +1,31 @@
+<h1><%= book.title %></h1>
+<p>
+  <strong>Author: </strong
+  ><a href="<%= book.author.url %>"><%= book.author.name %></a>
+</p>
+<p><strong>Summary: </strong><%= book.summary %></p>
+<p><strong>ISBN: </strong><%= book.isbn %></p>
+<p>
+  <strong>Genre:</strong>
+  <% book.genre.forEach((element, i) => { %>
+  <a href="<%= element.url %>"><%= element.name %></a><% if(i <
+  book.genre.length - 1) { %>,<% }}) %>
+</p>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Copies</h4>
+  <% book_instances.forEach(element => { if (element.status === "Available") {%>
+  <p class="text-success"><%= element.status %></p>
+  <% } else if(element.status === "Maintenance"){ %>
+  <p class="text-danger"><%= element.status %></p>
+  <% } else { %>
+  <p class="text-warning"><%= element.status %></p>
+  <% } %>
+  <p><strong>Imprint: <%= element.imprint %></strong></p>
+  <% if (element.status != "Available") { %>
+  <p><strong>Due back: <%= element.due_back %></strong></p>
+  <% } %>
+  <p>
+    <strong>ID: <a href="<%= element.url %>"><%= element.id %></a></strong>
+  </p>
+</div>
+<% }) %>
